@@ -20,8 +20,8 @@
   <style>
     :root{--bg:#0b0d0f;--bg2:#111417;--panel:#15181b;--ink:#f7f4ee;--muted:#bbb6ae;--soft:#8e8a84;--line:#2b2e31;--accent:#f04432;--accent2:#ff5b42;--light:#ebe7df;--display:'Barlow Condensed',Arial,sans-serif;--body:'Manrope',Arial,sans-serif}
     *{box-sizing:border-box}
-    html{scroll-behavior:smooth;background:var(--bg);scroll-padding-top:88px}
-    body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.65;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+    html{scroll-behavior:smooth;background:var(--bg);scroll-padding-top:88px;max-width:100%;overflow-x:clip}
+    body{margin:0;max-width:100%;background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.65;overflow-x:hidden;-webkit-font-smoothing:antialiased}
     img{display:block;max-width:100%}
     a{color:inherit;text-decoration:none}
     button,input,textarea,select{font:inherit}
@@ -45,6 +45,8 @@
     .nav-cta,.btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;min-height:48px;padding:0 20px;border:1px solid rgba(255,255,255,.18);text-transform:uppercase;letter-spacing:.08em;font-weight:800;font-size:12px;transition:transform .18s ease,background .18s ease,border-color .18s ease}
     .nav-cta{background:var(--accent);border-color:var(--accent);white-space:nowrap}
     .nav-cta:hover,.btn:hover{transform:translateY(-2px)}
+    .arrow-icon{width:16px;height:16px;flex:0 0 auto;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round;transition:transform .18s ease}
+    a:hover>.arrow-icon,button:hover>.arrow-icon{transform:translateX(2px)}
     .menu-btn{display:none;background:none;border:1px solid rgba(255,255,255,.2);width:46px;height:46px;padding:0;font-size:21px;cursor:pointer}
     .mobile-panel{position:fixed;z-index:95;inset:0;background:#0b0d0f;padding:calc(24px + env(safe-area-inset-top)) 26px calc(26px + env(safe-area-inset-bottom));display:flex;flex-direction:column;transform:translateX(100%);visibility:hidden;transition:transform .3s ease,visibility .3s step-end}
     .mobile-panel.open{transform:none;visibility:visible;transition:transform .3s ease}
@@ -145,7 +147,7 @@
     .process-step:not(:first-child){padding-left:26px}.process-step:last-child{border-right:0}
     .process-step>span{color:var(--accent);font:700 13px var(--display)}
     .process-step h3{font:800 28px/1 var(--display);text-transform:uppercase;margin:58px 0 12px;overflow-wrap:anywhere}
-    .process-step p{font-size:13px;color:#b0aba4}
+    .process-step p{font-size:clamp(14px,.95vw,15.5px);line-height:1.62;color:#b8b3ac;max-width:28ch}
     .cta-band{position:relative;min-height:620px;background:var(--accent);display:flex;align-items:center;padding:80px max(22px,8vw);overflow:hidden}
     .cta-band:after{content:'BOSS';position:absolute;right:-4vw;bottom:-7vw;font:800 32vw/.7 var(--display);color:rgba(0,0,0,.08);letter-spacing:-.08em;pointer-events:none}
     .cta-copy{position:relative;z-index:2;min-width:0}
@@ -224,10 +226,11 @@
       .progress-rail{right:14px;height:165px}
     }
     @media(max-width:760px){
-      body{font-size:15px;padding-bottom:calc(72px + env(safe-area-inset-bottom))}
+      body{font-size:15px;padding-bottom:calc(72px + env(safe-area-inset-bottom));overflow-x:clip}
       html{scroll-padding-top:76px}
       .site-header{height:70px;padding:env(safe-area-inset-top) 18px 0;grid-template-columns:auto minmax(0,1fr) auto;min-height:calc(70px + env(safe-area-inset-top))}
       .site-header.scrolled{height:70px;min-height:calc(70px + env(safe-area-inset-top))}
+      .brand{max-width:calc(100vw - 24px - env(safe-area-inset-left) - env(safe-area-inset-right))}
       .brand img{width:44px;height:44px}
       .brand span{display:none}
       .nav-cta{display:none}
@@ -238,7 +241,7 @@
       .hero-gridline{display:none}
       .hero-media{background-position:60% center}
       .hero-scrim{background:linear-gradient(0deg,rgba(6,7,8,.97) 0%,rgba(6,7,8,.68) 60%,rgba(6,7,8,.34) 100%)}
-      .hero-copy{width:100%;padding:0}
+      .hero-copy{width:100%;padding:0;max-width:calc(100vw - max(18px,env(safe-area-inset-left)) - max(18px,env(safe-area-inset-right)))}
       .hero h1{font-size:clamp(60px,20vw,94px);line-height:.86;letter-spacing:-.015em}
       .hero-copy>p{font-size:15px;line-height:1.55}
       .hero-actions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
@@ -269,14 +272,15 @@
       .gallery-item{grid-column:span 1!important;grid-row:span 1!important}
       .gallery-item.g1,.gallery-item.g6{grid-column:1/-1!important}
       .gallery-overlay{opacity:1;background:linear-gradient(0deg,rgba(0,0,0,.78),transparent 60%);padding:13px}
-      .gallery-overlay strong{font-size:11px}.gallery-overlay b{font-size:15px}
+      .gallery-overlay strong{font-size:11px}.gallery-overlay .arrow-icon{width:15px;height:15px}
       .why-grid{grid-template-columns:minmax(0,1fr)}
       .why-card{min-height:205px;padding:22px}
       .why-card h3{margin-top:42px}
       .process-head{display:block}
       .process-grid{grid-template-columns:minmax(0,1fr);margin-top:36px}
       .process-step,.process-step:not(:first-child),.process-step:last-child{padding:22px 0;border-right:0;border-bottom:1px solid var(--line);border-top:0;min-height:0}
-      .process-step h3{margin:28px 0 9px;font-size:27px}
+      .process-step h3{margin:28px 0 9px;font-size:27px;line-height:1.12}
+      .process-step p{font-size:14.5px;line-height:1.58}
       .cta-band{min-height:520px;padding:70px 22px}
       .cta-band h2{font-size:20vw}
       .cta-band p{font-size:17px}
@@ -288,11 +292,15 @@
       .lightbox{padding:18px}.lightbox img{max-width:100%;max-height:75vh}
       .progress-rail{right:6px;height:96px;width:14px;grid-template-columns:14px;gap:0;opacity:.9}
       .progress-copy{display:none}
-      .mobile-dock{position:fixed;z-index:68;left:12px;right:12px;bottom:calc(10px + env(safe-area-inset-bottom));height:56px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));background:rgba(12,14,16,.93);border:1px solid rgba(255,255,255,.12);box-shadow:0 12px 30px rgba(0,0,0,.3)}
+      .mobile-dock{position:fixed;z-index:68;left:max(8px,env(safe-area-inset-left));right:max(8px,env(safe-area-inset-right));max-width:calc(100vw - 16px - env(safe-area-inset-left) - env(safe-area-inset-right));bottom:calc(10px + env(safe-area-inset-bottom));height:56px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));background:rgba(12,14,16,.93);border:1px solid rgba(255,255,255,.12);box-shadow:0 12px 30px rgba(0,0,0,.3)}
       @supports(backdrop-filter:blur(14px)){.mobile-dock{backdrop-filter:blur(14px)}}
       .mobile-dock a{display:flex;align-items:center;justify-content:center;gap:7px;font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.07em;border-right:1px solid rgba(255,255,255,.1)}
       .mobile-dock a:last-child{border-right:0}
       .mobile-dock span{color:var(--accent);font-size:17px}
+    }
+    @media(max-width:430px){
+      .hero-actions{width:100%;max-width:340px}
+      .services-intro{max-width:30ch}
     }
     @media(max-width:390px){
       .section{padding-inline:18px}
@@ -305,6 +313,16 @@
       .gallery-grid{grid-template-columns:1fr;grid-auto-rows:250px}
       .gallery-item,.gallery-item.g1,.gallery-item.g6{grid-column:1!important}
       .contact-form{margin-inline:-18px}
+    }
+    @media(max-width:360px){
+      .brand img{width:40px;height:40px}
+      .hero-actions .btn{font-size:9px}
+      .mobile-dock a{font-size:8px}
+    }
+    @media(max-width:760px) and (hover:none) and (pointer:coarse){
+      .nav-cta:hover,.btn:hover,.gallery-item:hover,.service-row:hover,.mobile-dock a:hover{transform:none}
+      .btn:active,.gallery-item:active,.mobile-dock a:active{transform:scale(.985)}
+      .gallery-item{-webkit-tap-highlight-color:transparent}
     }
     @media(max-height:520px) and (orientation:landscape){
       .hero{min-height:720px;padding-top:100px}
@@ -338,7 +356,7 @@
   <button class="menu-close" id="menuClose" aria-label="Zatvori meni">✕</button>
   <div class="mobile-brand">BOSS <span>INVEST GROUP</span></div>
   <nav class="mobile-links" aria-label="Mobilna navigacija">
-    <a href="#o-nama">O nama <span>→</span></a><a href="#usluge">Usluge <span>→</span></a><a href="#projekti">Projekti <span>→</span></a><a href="#zasto-mi">Zašto mi <span>→</span></a><a href="#kontakt">Kontakt <span>→</span></a>
+    <a href="#o-nama">O nama <svg class="arrow-icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M5 12h13M13 6l6 6-6 6"/></svg></a><a href="#usluge">Usluge <svg class="arrow-icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M5 12h13M13 6l6 6-6 6"/></svg></a><a href="#projekti">Projekti <svg class="arrow-icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M5 12h13M13 6l6 6-6 6"/></svg></a><a href="#zasto-mi">Zašto mi <svg class="arrow-icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M5 12h13M13 6l6 6-6 6"/></svg></a><a href="#kontakt">Kontakt <svg class="arrow-icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M5 12h13M13 6l6 6-6 6"/></svg></a>
   </nav>
   <a href="tel:+381668869760" class="mobile-phone">066 88 69 760</a>
 </div>
@@ -393,17 +411,17 @@
       <article class="service-row" data-reveal>
         <div class="service-index">01</div>
         <div class="service-image"><img src="/assets/machine-wall.jpg" width="279" height="372" loading="lazy" decoding="async" alt="Mašinsko malterisanje zida" /></div>
-        <div class="service-content"><div class="service-kicker">GLAVNA USLUGA</div><h3>Mašinsko malterisanje</h3><p>Brže izvođenje, ujednačen nanos i kvalitetna završna obrada za kuće, stambene objekte i velike projekte.</p><ul><li>Precizan nanos</li><li>Brza realizacija</li><li>Profesionalna oprema</li></ul><a href="tel:+381668869760">Zatražite ponudu →</a></div>
+        <div class="service-content"><div class="service-kicker">GLAVNA USLUGA</div><h3>Mašinsko malterisanje</h3><p>Brže izvođenje, ujednačen nanos i kvalitetna završna obrada za kuće, stambene objekte i velike projekte.</p><ul><li>Precizan nanos</li><li>Brza realizacija</li><li>Profesionalna oprema</li></ul><a href="tel:+381668869760">Zatražite ponudu <svg class="arrow-icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M5 12h13M13 6l6 6-6 6"/></svg></a></div>
       </article>
       <article class="service-row" data-reveal>
         <div class="service-index">02</div>
         <div class="service-image"><img src="/assets/screed.jpg" width="280" height="372" loading="lazy" decoding="async" alt="Izrada cementne košuljice" /></div>
-        <div class="service-content"><div class="service-kicker">RAVNA I SPREMNA PODLOGA</div><h3>Cementna košuljica</h3><p>Priprema i profesionalna izrada cementne košuljice sa fokusom na ravnost, organizaciju i stabilnu podlogu za završne slojeve.</p><ul><li>Dobra priprema</li><li>Ravna površina</li><li>Kontrola izvođenja</li></ul><a href="tel:+381668869760">Dogovorite radove →</a></div>
+        <div class="service-content"><div class="service-kicker">RAVNA I SPREMNA PODLOGA</div><h3>Cementna košuljica</h3><p>Priprema i profesionalna izrada cementne košuljice sa fokusom na ravnost, organizaciju i stabilnu podlogu za završne slojeve.</p><ul><li>Dobra priprema</li><li>Ravna površina</li><li>Kontrola izvođenja</li></ul><a href="tel:+381668869760">Dogovorite radove <svg class="arrow-icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M5 12h13M13 6l6 6-6 6"/></svg></a></div>
       </article>
       <article class="service-row" data-reveal>
         <div class="service-index">03</div>
         <div class="service-image"><img src="/assets/materials-yard.jpg" width="280" height="376" loading="lazy" decoding="async" alt="Rasuti građevinski materijali" /></div>
-        <div class="service-content"><div class="service-kicker">MATERIJAL ZA GRADILIŠTE</div><h3>Rasuti materijali</h3><p>Podrška gradilištima kroz organizovanu nabavku i dopremu rasutih građevinskih materijala prema potrebama projekta.</p><ul><li>Organizovana doprema</li><li>Za veće projekte</li><li>Direktan dogovor</li></ul><a href="#kontakt">Pošaljite upit →</a></div>
+        <div class="service-content"><div class="service-kicker">MATERIJAL ZA GRADILIŠTE</div><h3>Rasuti materijali</h3><p>Podrška gradilištima kroz organizovanu nabavku i dopremu rasutih građevinskih materijala prema potrebama projekta.</p><ul><li>Organizovana doprema</li><li>Za veće projekte</li><li>Direktan dogovor</li></ul><a href="#kontakt">Pošaljite upit <svg class="arrow-icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M5 12h13M13 6l6 6-6 6"/></svg></a></div>
       </article>
     </div>
   </section>
@@ -412,14 +430,14 @@
     <span class="section-number">03 / PROJEKTI</span>
     <div class="projects-head" data-reveal><div class="section-heading"><div class="kicker">Na terenu</div><h2>RADOVI KOJI<br><em>GOVORE ZA NAS.</em></h2></div><p>Od pripreme i izvođenja do završnih površina — izdvojeni kadrovi sa stvarnih gradilišta Boss Invest Group.</p></div>
     <div class="gallery-grid">
-      <button class="gallery-item g1" data-img="/assets/large-project.jpg" data-alt="Veliki stambeni projekat" aria-label="Otvori fotografiju: veliki stambeni projekat"><img src="/assets/large-project.jpg" width="279" height="260" loading="lazy" decoding="async" alt="Veliki stambeni projekat u izgradnji" /><span class="gallery-overlay"><span>01</span><strong>Veliki projekti</strong><b>↗</b></span></button>
-      <button class="gallery-item g2" data-img="/assets/interior-work.jpg" data-alt="Radovi u enterijeru" aria-label="Otvori fotografiju: radovi u enterijeru"><img src="/assets/interior-work.jpg" width="280" height="372" loading="lazy" decoding="async" alt="Radovi na unutrašnjem zidu" /><span class="gallery-overlay"><span>02</span><strong>Radovi u enterijeru</strong><b>↗</b></span></button>
-      <button class="gallery-item g3" data-img="/assets/equipment.jpg" data-alt="Oprema na gradilištu" aria-label="Otvori fotografiju: oprema na gradilištu"><img src="/assets/equipment.jpg" width="280" height="260" loading="lazy" decoding="async" alt="Oprema Boss Invest Group na gradilištu" /><span class="gallery-overlay"><span>03</span><strong>Oprema</strong><b>↗</b></span></button>
-      <button class="gallery-item g4" data-img="/assets/site-exterior.jpg" data-alt="Gradilište i objekat" aria-label="Otvori fotografiju: gradilište i objekat"><img src="/assets/site-exterior.jpg" width="279" height="376" loading="lazy" decoding="async" alt="Objekat na kome se izvode radovi" /><span class="gallery-overlay"><span>04</span><strong>Gradilište</strong><b>↗</b></span></button>
-      <button class="gallery-item g5" data-img="/assets/plaster-team.jpg" data-alt="Ekipa na mašinskom malterisanju" aria-label="Otvori fotografiju: ekipa na radu"><img src="/assets/plaster-team.jpg" width="280" height="376" loading="lazy" decoding="async" alt="Ekipa na mašinskom malterisanju" /><span class="gallery-overlay"><span>05</span><strong>Ekipa na radu</strong><b>↗</b></span></button>
-      <button class="gallery-item g6" data-img="/assets/finished.jpg" data-alt="Završena unutrašnja površina" aria-label="Otvori fotografiju: završena površina"><img src="/assets/finished.jpg" width="950" height="948" loading="lazy" decoding="async" alt="Završena unutrašnja površina nakon radova" /><span class="gallery-overlay"><span>06</span><strong>Završna obrada</strong><b>↗</b></span></button>
-      <button class="gallery-item g7" data-img="/assets/screed.jpg" data-alt="Radovi na cementnoj košuljici" aria-label="Otvori fotografiju: cementna košuljica"><img src="/assets/screed.jpg" width="280" height="372" loading="lazy" decoding="async" alt="Radovi na cementnoj košuljici" /><span class="gallery-overlay"><span>07</span><strong>Cementna košuljica</strong><b>↗</b></span></button>
-      <button class="gallery-item g8" data-img="/assets/machine-wall.jpg" data-alt="Mašinsko nanošenje maltera" aria-label="Otvori fotografiju: mašinsko malterisanje"><img src="/assets/machine-wall.jpg" width="279" height="372" loading="lazy" decoding="async" alt="Mašinsko nanošenje maltera na zid" /><span class="gallery-overlay"><span>08</span><strong>Mašinsko malterisanje</strong><b>↗</b></span></button>
+      <button class="gallery-item g1" data-img="/assets/large-project.jpg" data-alt="Veliki stambeni projekat" aria-label="Otvori fotografiju: veliki stambeni projekat"><img src="/assets/large-project.jpg" width="279" height="260" loading="lazy" decoding="async" alt="Veliki stambeni projekat u izgradnji" /><span class="gallery-overlay"><span>01</span><strong>Veliki projekti</strong><svg class="arrow-icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M7 17 17 7M9 7h8v8"/></svg></span></button>
+      <button class="gallery-item g2" data-img="/assets/interior-work.jpg" data-alt="Radovi u enterijeru" aria-label="Otvori fotografiju: radovi u enterijeru"><img src="/assets/interior-work.jpg" width="280" height="372" loading="lazy" decoding="async" alt="Radovi na unutrašnjem zidu" /><span class="gallery-overlay"><span>02</span><strong>Radovi u enterijeru</strong><svg class="arrow-icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M7 17 17 7M9 7h8v8"/></svg></span></button>
+      <button class="gallery-item g3" data-img="/assets/equipment.jpg" data-alt="Oprema na gradilištu" aria-label="Otvori fotografiju: oprema na gradilištu"><img src="/assets/equipment.jpg" width="280" height="260" loading="lazy" decoding="async" alt="Oprema Boss Invest Group na gradilištu" /><span class="gallery-overlay"><span>03</span><strong>Oprema</strong><svg class="arrow-icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M7 17 17 7M9 7h8v8"/></svg></span></button>
+      <button class="gallery-item g4" data-img="/assets/site-exterior.jpg" data-alt="Gradilište i objekat" aria-label="Otvori fotografiju: gradilište i objekat"><img src="/assets/site-exterior.jpg" width="279" height="376" loading="lazy" decoding="async" alt="Objekat na kome se izvode radovi" /><span class="gallery-overlay"><span>04</span><strong>Gradilište</strong><svg class="arrow-icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M7 17 17 7M9 7h8v8"/></svg></span></button>
+      <button class="gallery-item g5" data-img="/assets/plaster-team.jpg" data-alt="Ekipa na mašinskom malterisanju" aria-label="Otvori fotografiju: ekipa na radu"><img src="/assets/plaster-team.jpg" width="280" height="376" loading="lazy" decoding="async" alt="Ekipa na mašinskom malterisanju" /><span class="gallery-overlay"><span>05</span><strong>Ekipa na radu</strong><svg class="arrow-icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M7 17 17 7M9 7h8v8"/></svg></span></button>
+      <button class="gallery-item g6" data-img="/assets/finished.jpg" data-alt="Završena unutrašnja površina" aria-label="Otvori fotografiju: završena površina"><img src="/assets/finished.jpg" width="950" height="948" loading="lazy" decoding="async" alt="Završena unutrašnja površina nakon radova" /><span class="gallery-overlay"><span>06</span><strong>Završna obrada</strong><svg class="arrow-icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M7 17 17 7M9 7h8v8"/></svg></span></button>
+      <button class="gallery-item g7" data-img="/assets/screed.jpg" data-alt="Radovi na cementnoj košuljici" aria-label="Otvori fotografiju: cementna košuljica"><img src="/assets/screed.jpg" width="280" height="372" loading="lazy" decoding="async" alt="Radovi na cementnoj košuljici" /><span class="gallery-overlay"><span>07</span><strong>Cementna košuljica</strong><svg class="arrow-icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M7 17 17 7M9 7h8v8"/></svg></span></button>
+      <button class="gallery-item g8" data-img="/assets/machine-wall.jpg" data-alt="Mašinsko nanošenje maltera" aria-label="Otvori fotografiju: mašinsko malterisanje"><img src="/assets/machine-wall.jpg" width="279" height="372" loading="lazy" decoding="async" alt="Mašinsko nanošenje maltera na zid" /><span class="gallery-overlay"><span>08</span><strong>Mašinsko malterisanje</strong><svg class="arrow-icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M7 17 17 7M9 7h8v8"/></svg></span></button>
     </div>
   </section>
 
@@ -468,7 +486,7 @@
         <label>Telefon<input name="phone" inputmode="tel" autocomplete="tel" required /></label>
         <label>Vrsta projekta<select name="type"><option>Mašinsko malterisanje</option><option>Cementna košuljica</option><option>Rasuti materijali</option><option>Drugo</option></select></label>
         <label>Poruka<textarea name="message" placeholder="Lokacija, kvadratura i kratak opis projekta"></textarea></label>
-        <button class="form-submit" type="submit">Pošaljite SMS upit →</button>
+        <button class="form-submit" type="submit">Pošaljite SMS upit <svg class="arrow-icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M5 12h13M13 6l6 6-6 6"/></svg></button>
         <p class="form-note">Klik na dugme otvara SMS poruku na telefonu sa već popunjenim podacima.</p>
       </form>
     </div>
