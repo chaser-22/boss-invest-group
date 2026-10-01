@@ -1,2 +1,4 @@
 User-agent: *
 Allow: /
+
+Sitemap: https://boss-invest-group.onrender.com/sitemap.xml
