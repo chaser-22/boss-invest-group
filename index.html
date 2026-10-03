@@ -470,6 +470,20 @@
       .contact-row{grid-template-columns:82px minmax(0,1fr)}
     }
 
+  
+    /* QA correction pass */
+    .why-card{grid-template-columns:42px minmax(250px,.7fr) minmax(0,1.3fr);column-gap:24px}
+    .why-card h3{min-width:0;overflow-wrap:normal}
+    .why-card p{min-width:0}
+    @media(max-width:1120px){
+      .why-card{grid-template-columns:38px minmax(220px,.72fr) minmax(0,1.28fr);gap:18px}
+      .why-card h3{font-size:26px}
+    }
+    @media(max-width:900px){
+      .why-card{grid-template-columns:34px minmax(0,1fr)}
+      .why-card p{grid-column:2}
+    }
+
   </style>
 </head>
 <body>
@@ -554,7 +568,7 @@
       <div class="service-list">
         <article class="service-row" data-reveal>
           <div class="service-number">01</div>
-          <div class="service-photo"><img src="/assets/instagram-wall-2026.png" width="1365" height="768" loading="lazy" decoding="async" alt="Boss Invest Group majstor tokom mašinskog malterisanja"></div>
+          <div class="service-photo"><img src="/assets/machine-wall.jpg" width="280" height="376" loading="lazy" decoding="async" alt="Boss Invest Group majstor tokom mašinskog malterisanja"></div>
           <div class="service-body">
             <span class="service-index">GLAVNA USLUGA</span>
             <h3>Mašinsko malterisanje</h3>
@@ -601,7 +615,7 @@
           <div><strong>Agregati</strong><span>Napajanje kada uslovi to zahtevaju.</span></div>
         </div>
       </div>
-      <div class="proof-media" data-reveal><img src="/assets/instagram-team-2026.png" width="1365" height="768" loading="lazy" decoding="async" alt="Boss Invest Group ekipa tokom mašinskog malterisanja"></div>
+      <div class="proof-media" data-reveal><img src="/assets/plaster-team.jpg" width="280" height="376" loading="lazy" decoding="async" alt="Boss Invest Group ekipa tokom mašinskog malterisanja"></div>
     </div>
   </section>
 
@@ -615,8 +629,8 @@
         </div>
       </div>
       <div class="project-grid">
-        <button class="project p1" data-img="/assets/instagram-team-2026.png" data-alt="Boss Invest Group ekipa na mašinskom malterisanju"><img src="/assets/instagram-team-2026.png" width="1365" height="768" loading="lazy" decoding="async" alt="Boss Invest Group ekipa na mašinskom malterisanju"><span class="project-meta"><span>01 · Na terenu</span><strong>Ekipa na radu</strong></span></button>
-        <button class="project p2" data-img="/assets/instagram-wall-2026.png" data-alt="Mašinsko nanošenje maltera"><img src="/assets/instagram-wall-2026.png" width="1365" height="768" loading="lazy" decoding="async" alt="Mašinsko nanošenje maltera"><span class="project-meta"><span>02 · Malterisanje</span><strong>Rad na zidu</strong></span></button>
+        <button class="project p1" data-img="/assets/plaster-team.jpg" data-alt="Boss Invest Group ekipa na mašinskom malterisanju"><img src="/assets/plaster-team.jpg" width="280" height="376" loading="lazy" decoding="async" alt="Boss Invest Group ekipa na mašinskom malterisanju"><span class="project-meta"><span>01 · Na terenu</span><strong>Ekipa na radu</strong></span></button>
+        <button class="project p2" data-img="/assets/machine-wall.jpg" data-alt="Mašinsko nanošenje maltera"><img src="/assets/machine-wall.jpg" width="280" height="376" loading="lazy" decoding="async" alt="Mašinsko nanošenje maltera"><span class="project-meta"><span>02 · Malterisanje</span><strong>Rad na zidu</strong></span></button>
         <button class="project p3" data-img="/assets/interior-work.jpg" data-alt="Radovi na unutrašnjem zidu"><img src="/assets/interior-work.jpg" width="280" height="372" loading="lazy" decoding="async" alt="Radovi na unutrašnjem zidu"><span class="project-meta"><span>03 · Enterijer</span><strong>Priprema zidova</strong></span></button>
         <button class="project p4" data-img="/assets/finished.jpg" data-alt="Završene unutrašnje površine"><img src="/assets/finished.jpg" width="950" height="948" loading="lazy" decoding="async" alt="Završene unutrašnje površine"><span class="project-meta"><span>04 · Završeno</span><strong>Čiste površine</strong></span></button>
         <button class="project p5" data-img="/assets/equipment.jpg" data-alt="Oprema na gradilištu"><img src="/assets/equipment.jpg" width="280" height="260" loading="lazy" decoding="async" alt="Oprema Boss Invest Group na gradilištu"><span class="project-meta"><span>05 · Oprema</span><strong>Profesionalna mehanizacija</strong></span></button>
