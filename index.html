@@ -92,10 +92,10 @@
     .mobile-contact small{color:var(--muted);text-transform:uppercase;letter-spacing:.12em;font-size:9px}
     .mobile-contact a{font:700 26px/1.2 var(--display);color:var(--red)}
 
-    .hero{min-height:100svh;display:grid;grid-template-columns:minmax(0,1.03fr) minmax(420px,.97fr);background:#0b0d0f;padding-top:78px}
+    .hero{min-height:100svh;display:grid;grid-template-columns:minmax(0,1.2fr) minmax(420px,.8fr);background:#0b0d0f;padding-top:78px}
     .hero-copy{display:flex;align-items:center;padding:clamp(64px,8vw,120px) clamp(24px,6vw,92px) clamp(58px,7vw,96px) max(var(--pad),calc((100vw - var(--max))/2 + var(--pad)))}
     .hero-copy-inner{width:min(720px,100%)}
-    .hero h1{font-size:clamp(62px,7.7vw,116px);margin:20px 0 24px;max-width:9.5ch}
+    .hero h1{font-size:clamp(58px,6vw,88px);margin:20px 0 24px;max-width:12ch;overflow-wrap:normal}
     .hero h1 span{color:var(--red)}
     .hero-sub{font-size:clamp(17px,1.45vw,21px);color:#d1ccc5;max-width:58ch;margin:0 0 30px}
     .hero-actions{display:flex;gap:10px;flex-wrap:wrap}
@@ -223,16 +223,16 @@
     .lightbox span{position:absolute;bottom:calc(18px + env(safe-area-inset-bottom));left:20px;right:20px;text-align:center;font-size:12px;color:#bdb8b0}
 
     .mobile-dock{display:none}
-    [data-reveal]{transition:transform .55s ease,opacity .55s ease}
-    [data-reveal].pre{transform:translateY(12px);opacity:.001}
-    [data-reveal].shown{transform:none;opacity:1}
+    [data-reveal]{transition:transform .55s ease}
+    [data-reveal].pre{transform:translateY(12px)}
+    [data-reveal].shown{transform:none}
 
     @media(max-width:1080px){
       .desktop-nav{display:none}
       .header-inner{grid-template-columns:auto 1fr auto auto}
       .menu-btn{display:block}
-      .hero{grid-template-columns:minmax(0,1fr) minmax(350px,.82fr)}
-      .hero h1{font-size:clamp(60px,8.5vw,98px)}
+      .hero{grid-template-columns:minmax(0,1.08fr) minmax(350px,.92fr)}
+      .hero h1{font-size:clamp(56px,7.2vw,78px)}
       .service-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
       .service-card:last-child{grid-column:1/-1;min-height:520px;display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr)}
       .service-card:last-child .service-photo{aspect-ratio:auto}
@@ -360,7 +360,7 @@
     <div class="hero-copy">
       <div class="hero-copy-inner" data-reveal>
         <div class="eyebrow">Novi Sad · Srbija</div>
-        <h1 class="display">Mašinsko malterisanje <span>bez improvizacije.</span></h1>
+        <h1 class="display">Mašinsko<br>malterisanje<br><span>bez improvizacije.</span></h1>
         <p class="hero-sub">Boss Invest Group izvodi mašinsko malterisanje, cementne košuljice i građevinske radove uz organizovan proces, pouzdanu ekipu i dogovor koji se poštuje.</p>
         <div class="hero-actions">
           <a class="btn btn-primary" href="tel:+381668869760">Pozovite nas <svg class="arrow" aria-hidden="true" viewBox="0 0 24 24"><path d="M5 12h13M13 6l6 6-6 6"/></svg></a>
