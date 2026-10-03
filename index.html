@@ -989,9 +989,14 @@
     .force-reduced-motion .section-title{clip-path:none!important;transform:none!important}
     .force-reduced-motion .eyebrow:before{transform:scaleX(1)!important}
 
+
+    .deep-linking body{opacity:0}
+    body{transition:opacity .14s ease}
+    @media(prefers-reduced-motion:reduce){body{transition:none}}
+
   </style>
   <script>
-  (()=>{const r=document.documentElement;r.classList.add('js');const forced=new URLSearchParams(location.search).get('motion')==='reduce';const topLevel=window.top===window.self;const deepLink=location.hash.length>1;if(forced)r.classList.add('force-reduced-motion');try{if(topLevel&&!deepLink&&!forced&&!matchMedia('(prefers-reduced-motion: reduce)').matches&&!sessionStorage.getItem('boss-intro-seen'))r.classList.add('show-loader')}catch(e){}setTimeout(()=>r.classList.add('intro-ready'),1800)})();
+  (()=>{const r=document.documentElement;r.classList.add('js');const forced=new URLSearchParams(location.search).get('motion')==='reduce';const topLevel=window.top===window.self;const deepLink=location.hash.length>1;if(forced)r.classList.add('force-reduced-motion');if(deepLink){r.classList.add('deep-linking');setTimeout(()=>r.classList.remove('deep-linking'),600)}try{if(topLevel&&!deepLink&&!forced&&!matchMedia('(prefers-reduced-motion: reduce)').matches&&!sessionStorage.getItem('boss-intro-seen'))r.classList.add('show-loader')}catch(e){}setTimeout(()=>r.classList.add('intro-ready'),1800)})();
   </script>
 </head>
 <body>
@@ -1305,7 +1310,10 @@
     initialHashTarget.querySelectorAll('[data-reveal]').forEach(el=>el.classList.add('show'));
     initialHashTarget.classList.add('flow-seen');
     if(initialHashTarget===cta)cta.classList.add('show');
-    const settleHash=()=>initialHashTarget.scrollIntoView({behavior:'auto',block:'start'});
+    const settleHash=()=>{
+      initialHashTarget.scrollIntoView({behavior:'auto',block:'start'});
+      requestAnimationFrame(()=>root.classList.remove('deep-linking'));
+    };
     requestAnimationFrame(settleHash);
     setTimeout(settleHash,60);
   }
