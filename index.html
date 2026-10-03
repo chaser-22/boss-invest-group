@@ -1244,6 +1244,39 @@
       .section{padding:54px 0}
     }
 
+
+    /* Final mobile QA fixes */
+    @media(max-width:520px){
+      .hero h1{
+        width:100%;max-width:none;
+        font-size:clamp(32px,9vw,40px);
+        letter-spacing:-.048em
+      }
+      .hero-line{overflow:visible}
+      .hero-line>span{white-space:normal;max-width:100%}
+      .js:not(.intro-ready) .hero-line>span{opacity:0;transform:translateY(12px)}
+      .hero-line>span{transition:opacity .45s ease,transform .5s cubic-bezier(.2,.8,.2,1)}
+      .intro-ready .hero-line>span{opacity:1;transform:none}
+      .mobile-dock{
+        opacity:0;
+        transform:translateY(calc(100% + 18px));
+        pointer-events:none;
+        transition:opacity .22s ease,transform .3s cubic-bezier(.2,.8,.2,1)
+      }
+      body.mobile-dock-visible .mobile-dock{
+        opacity:1;
+        transform:none;
+        pointer-events:auto
+      }
+    }
+    @media(max-width:380px){
+      .hero h1{font-size:32px}
+    }
+    @media(prefers-reduced-motion:reduce){
+      .mobile-dock{transition:none!important}
+    }
+    .force-reduced-motion .mobile-dock{transition:none!important}
+
   </style>
   <script>
   (()=>{const r=document.documentElement;r.classList.add('js');const q=new URLSearchParams(location.search);const forced=q.get('motion')==='reduce';const forceLoader=q.get('loader')==='1';const topLevel=window.top===window.self;const deepLink=location.hash.length>1;if(forced)r.classList.add('force-reduced-motion');if(deepLink){r.classList.add('deep-linking');setTimeout(()=>r.classList.remove('deep-linking'),600)}try{const seen=sessionStorage.getItem('boss-intro-seen');if(topLevel&&!deepLink&&!forced&&!matchMedia('(prefers-reduced-motion: reduce)').matches&&(forceLoader||!seen))r.classList.add('show-loader')}catch(e){}setTimeout(()=>r.classList.add('intro-ready'),5000)})();
@@ -1572,8 +1605,11 @@
   menu.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>setMenu(false)));
 
   const syncHeader=()=>header.classList.toggle('scrolled',scrollY>12);
-  addEventListener('scroll',syncHeader,{passive:true});
-  syncHeader();
+  const syncMobileDock=()=>document.body.classList.toggle('mobile-dock-visible',innerWidth<=520&&scrollY>120);
+  const syncChrome=()=>{syncHeader();syncMobileDock()};
+  addEventListener('scroll',syncChrome,{passive:true});
+  addEventListener('resize',syncMobileDock,{passive:true});
+  syncChrome();
 
   const revealEls=[...document.querySelectorAll('[data-reveal]')].filter(el=>!el.closest('.hero'));
   const cta=document.querySelector('[data-cta-reveal]');
