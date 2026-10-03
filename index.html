@@ -9,6 +9,7 @@
   <meta property="og:title" content="Boss Invest Group | Mašinsko malterisanje Novi Sad" />
   <meta property="og:description" content="Pouzdano mašinsko malterisanje, cementne košuljice i podrška na velikim projektima." />
   <meta property="og:type" content="website" />
+  <meta property="og:image" content="https://boss-invest-group.onrender.com/assets/hero.jpg" />
   <meta name="twitter:card" content="summary_large_image" />
   <link rel="preload" as="image" href="/assets/hero.jpg" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -61,23 +62,23 @@
     .hero-media{position:absolute;inset:0;background:url('/assets/hero.jpg') center 48%/cover no-repeat;transform:scale(1.025)}
     .hero-scrim{position:absolute;inset:0;background:linear-gradient(90deg,rgba(5,6,7,.96) 0%,rgba(5,6,7,.72) 43%,rgba(5,6,7,.24) 76%,rgba(5,6,7,.45) 100%),linear-gradient(0deg,rgba(5,6,7,.88),transparent 62%)}
     .hero-gridline{position:absolute;inset:0;background:linear-gradient(90deg,transparent calc(50% - .5px),rgba(255,255,255,.08) 50%,transparent calc(50% + .5px));pointer-events:none}
-    .hero-copy{position:relative;z-index:2;width:min(820px,70vw);padding-left:min(5vw,70px);min-width:0}
+    .hero-copy{position:relative;z-index:2;width:min(760px,68vw);padding-left:min(5vw,70px);min-width:0}
     .eyebrow,.kicker{display:flex;align-items:center;gap:12px;text-transform:uppercase;letter-spacing:.17em;font-size:11px;font-weight:800;color:#d7d1c9}
     .eyebrow span{width:34px;height:2px;background:var(--accent);flex:0 0 auto}
     .hero h1,.section h2,.cta-band h2{font-family:var(--display);font-weight:800;letter-spacing:-.025em;text-transform:uppercase;margin:18px 0 22px;line-height:.89;text-wrap:balance}
-    .hero h1{font-size:clamp(68px,10vw,146px);max-width:820px}
+    .hero h1{font-size:clamp(66px,8.3vw,124px);max-width:760px}
     .hero h1 em,.section h2 em{font-style:normal;color:var(--accent)}
-    .hero-copy>p{max-width:650px;color:#e0dbd3;font-size:18px;margin:0 0 28px}
+    .hero-copy>p{max-width:610px;color:#e0dbd3;font-size:17px;margin:0 0 26px}
     .hero-actions{display:flex;gap:12px;flex-wrap:wrap}
     .btn.primary{background:var(--accent);border-color:var(--accent)}
     .btn.ghost{background:rgba(10,10,10,.35)}
     @supports(backdrop-filter:blur(10px)){.btn.ghost{backdrop-filter:blur(10px)}}
     .btn.light{background:#fff;color:#111;border-color:#fff}
     .btn.dark{background:#111;color:#fff;border-color:#111}
-    .hero-stats{position:absolute;z-index:2;right:max(22px,4.5vw);bottom:62px;display:grid;grid-template-columns:repeat(3,minmax(112px,150px));border-top:1px solid rgba(255,255,255,.26)}
-    .hero-stats div{padding:16px 14px;border-left:1px solid rgba(255,255,255,.14);min-width:0}
-    .hero-stats strong{font:800 27px/1 var(--display);display:block}
-    .hero-stats span{font-size:9px;text-transform:uppercase;letter-spacing:.1em;color:#c7c1b9}
+    .hero-stats{position:relative;z-index:2;right:auto;bottom:auto;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));width:min(620px,100%);margin-top:34px;border-top:1px solid rgba(255,255,255,.3)}
+    .hero-stats div{padding:15px 14px 10px 0;border-right:1px solid rgba(255,255,255,.14);min-width:0}.hero-stats div+div{padding-left:18px}.hero-stats div:last-child{border-right:0}
+    .hero-stats strong{font:800 29px/1 var(--display);display:block}
+    .hero-stats span{display:block;margin-top:7px;font-size:8px;line-height:1.45;text-transform:uppercase;letter-spacing:.1em;color:#c7c1b9}
     .scroll-cue{position:absolute;z-index:2;right:max(22px,4.5vw);top:48%;transform:rotate(90deg) translateX(50%);transform-origin:right center;display:flex;gap:8px;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:#c7c1b9}
     .marquee{height:64px;display:flex;align-items:center;overflow:hidden;border-block:1px solid #292c2f;background:#0e1012}
     .marquee>div{font:800 22px/1 var(--display);letter-spacing:.06em;white-space:nowrap;animation:marquee 23s linear infinite}
@@ -246,7 +247,7 @@
       .hero-copy>p{font-size:15px;line-height:1.55}
       .hero-actions{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
       .hero-actions .btn{width:100%;padding:0 12px;font-size:10px;min-height:48px}
-      .hero-stats{position:relative;right:auto;bottom:auto;margin-top:34px;grid-template-columns:repeat(3,minmax(0,1fr));width:100%;border-color:rgba(255,255,255,.18)}
+      .hero-stats{position:relative;right:auto;bottom:auto;margin-top:30px;grid-template-columns:repeat(3,minmax(0,1fr));width:100%;border-color:rgba(255,255,255,.18)}
       .hero-stats div{padding:12px 8px}
       .hero-stats strong{font-size:20px}
       .hero-stats span{font-size:7px;line-height:1.4}
@@ -375,9 +376,9 @@
       <p>Specijalizovani za mašinsko malterisanje i građevinske radove koji traže brzinu, preciznost i dogovor koji se poštuje.</p>
       <div class="hero-actions"><a class="btn primary" href="tel:+381668869760">Pozovite nas</a><a class="btn ghost" href="#projekti">Pogledajte projekte</a></div>
       <div class="hero-stats">
+        <div><strong>800K m²</strong><span>urađenih projekata</span></div>
         <div><strong>100+</strong><span>završenih velikih projekata</span></div>
-        <div><strong>SRBIJA</strong><span>i inostranstvo</span></div>
-        <div><strong>2</strong><span>direktne linije za kontakt</span></div>
+        <div><strong>SRBIJA +</strong><span>iskustvo i u inostranstvu</span></div>
       </div>
     </div>
     <div class="scroll-cue">Skrolujte ↓</div>
@@ -395,8 +396,8 @@
         <div class="signature-line"><span>Novi Sad · Srbija</span><strong>Dogovor je dogovor.</strong></div>
       </div>
       <figure class="about-visual" data-reveal>
-        <img src="/assets/plaster-team.jpg" width="280" height="376" loading="lazy" decoding="async" alt="Boss Invest Group ekipa na mašinskom malterisanju" />
-        <figcaption class="visual-tag">REALNI RADOVI · REALNA EKIPA</figcaption>
+        <img src="/assets/finished.jpg" width="950" height="948" loading="lazy" decoding="async" alt="Završene unutrašnje površine nakon radova Boss Invest Group" />
+        <figcaption class="visual-tag">ZAVRŠEN PROJEKAT · NOVI SAD</figcaption>
       </figure>
     </div>
   </section>
@@ -430,8 +431,8 @@
     <span class="section-number">03 / PROJEKTI</span>
     <div class="projects-head" data-reveal><div class="section-heading"><div class="kicker">Na terenu</div><h2>RADOVI KOJI<br><em>GOVORE ZA NAS.</em></h2></div><p>Od pripreme i izvođenja do završnih površina — izdvojeni kadrovi sa stvarnih gradilišta Boss Invest Group.</p></div>
     <div class="gallery-grid">
-      <button class="gallery-item g1" data-img="/assets/large-project.jpg" data-alt="Veliki stambeni projekat" aria-label="Otvori fotografiju: veliki stambeni projekat"><img src="/assets/large-project.jpg" width="279" height="260" loading="lazy" decoding="async" alt="Veliki stambeni projekat u izgradnji" /><span class="gallery-overlay"><span>01</span><strong>Veliki projekti</strong><svg class="arrow-icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M7 17 17 7M9 7h8v8"/></svg></span></button>
-      <button class="gallery-item g2" data-img="/assets/interior-work.jpg" data-alt="Radovi u enterijeru" aria-label="Otvori fotografiju: radovi u enterijeru"><img src="/assets/interior-work.jpg" width="280" height="372" loading="lazy" decoding="async" alt="Radovi na unutrašnjem zidu" /><span class="gallery-overlay"><span>02</span><strong>Radovi u enterijeru</strong><svg class="arrow-icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M7 17 17 7M9 7h8v8"/></svg></span></button>
+      <button class="gallery-item g1" data-img="/assets/hero.jpg" data-alt="Silos i veliki projekat" aria-label="Otvori fotografiju: silos na velikom projektu"><img src="/assets/hero.jpg" width="950" height="950" loading="lazy" decoding="async" alt="Silos za mašinsko malterisanje na velikom projektu" /><span class="gallery-overlay"><span>01</span><strong>Veliki projekti</strong><svg class="arrow-icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M7 17 17 7M9 7h8v8"/></svg></span></button>
+      <button class="gallery-item g2" data-img="/assets/finished.jpg" data-alt="Završen enterijer" aria-label="Otvori fotografiju: završen enterijer"><img src="/assets/finished.jpg" width="950" height="948" loading="lazy" decoding="async" alt="Završene unutrašnje površine" /><span class="gallery-overlay"><span>02</span><strong>Završen enterijer</strong><svg class="arrow-icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M7 17 17 7M9 7h8v8"/></svg></span></button>
       <button class="gallery-item g3" data-img="/assets/equipment.jpg" data-alt="Oprema na gradilištu" aria-label="Otvori fotografiju: oprema na gradilištu"><img src="/assets/equipment.jpg" width="280" height="260" loading="lazy" decoding="async" alt="Oprema Boss Invest Group na gradilištu" /><span class="gallery-overlay"><span>03</span><strong>Oprema</strong><svg class="arrow-icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M7 17 17 7M9 7h8v8"/></svg></span></button>
       <button class="gallery-item g4" data-img="/assets/site-exterior.jpg" data-alt="Gradilište i objekat" aria-label="Otvori fotografiju: gradilište i objekat"><img src="/assets/site-exterior.jpg" width="279" height="376" loading="lazy" decoding="async" alt="Objekat na kome se izvode radovi" /><span class="gallery-overlay"><span>04</span><strong>Gradilište</strong><svg class="arrow-icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M7 17 17 7M9 7h8v8"/></svg></span></button>
       <button class="gallery-item g5" data-img="/assets/plaster-team.jpg" data-alt="Ekipa na mašinskom malterisanju" aria-label="Otvori fotografiju: ekipa na radu"><img src="/assets/plaster-team.jpg" width="280" height="376" loading="lazy" decoding="async" alt="Ekipa na mašinskom malterisanju" /><span class="gallery-overlay"><span>05</span><strong>Ekipa na radu</strong><svg class="arrow-icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M7 17 17 7M9 7h8v8"/></svg></span></button>
