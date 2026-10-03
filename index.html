@@ -496,6 +496,65 @@
       .eyebrow{font-size:9px}
     }
 
+  
+    /* Hero composition correction */
+    .hero{
+      min-height:calc(100svh - 0px);
+      grid-template-columns:minmax(0,1.14fr) minmax(390px,.86fr);
+      align-items:stretch;
+    }
+    .hero-copy{
+      padding-top:clamp(64px,7vw,96px);
+      padding-bottom:clamp(64px,7vw,96px);
+      padding-right:clamp(34px,4.2vw,64px);
+    }
+    .hero-copy-inner{width:min(680px,100%);min-width:0}
+    .hero h1{
+      font-size:clamp(50px,4.65vw,72px);
+      line-height:.95;
+      max-width:none;
+      overflow:visible;
+      margin:18px 0 24px;
+    }
+    .hero h1 span{
+      display:block;
+      font-size:.82em;
+      line-height:.98;
+      white-space:nowrap;
+      letter-spacing:-.045em;
+    }
+    .hero-sub{max-width:52ch}
+    .hero-proof{
+      grid-template-columns:1.2fr .8fr 1fr;
+      max-width:650px;
+      margin-top:36px;
+    }
+    .hero-proof strong{
+      font-size:clamp(21px,1.8vw,28px);
+      white-space:nowrap;
+    }
+    .hero-proof span{max-width:18ch}
+    .hero-media{
+      min-height:0;
+      margin:28px max(24px,2vw) 28px 0;
+      border:1px solid rgba(255,255,255,.08);
+      background:#15181b;
+    }
+    .hero-media img{object-position:54% center}
+    .hero-badge{left:18px;bottom:18px}
+    @media(max-width:1080px) and (min-width:821px){
+      .hero{grid-template-columns:minmax(0,1.18fr) minmax(340px,.82fr)}
+      .hero h1{font-size:clamp(44px,4.8vw,52px)}
+      .hero h1 span{font-size:.78em}
+      .hero-proof strong{font-size:20px}
+      .hero-copy{padding-right:30px}
+      .hero-media{margin-right:18px}
+    }
+    @media(max-width:820px){
+      .hero-media{margin:0;border:0}
+      .hero h1 span{font-size:1em;white-space:normal}
+    }
+
   </style>
 </head>
 <body>
