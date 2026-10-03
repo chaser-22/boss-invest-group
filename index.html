@@ -460,9 +460,33 @@
       .why-row:after{transform:scaleX(1)!important}
     }
 
+
+    .force-reduced-motion *{animation-duration:.001ms!important;animation-delay:0s!important;transition-duration:.001ms!important;scroll-behavior:auto!important}
+    .force-reduced-motion .site-loader{display:none!important}
+    .force-reduced-motion [data-reveal],
+    .force-reduced-motion .hero .eyebrow,
+    .force-reduced-motion .hero .hero-lead,
+    .force-reduced-motion .hero .hero-actions,
+    .force-reduced-motion .hero-stats,
+    .force-reduced-motion .hero-line>span,
+    .force-reduced-motion .hero-visual,
+    .force-reduced-motion .hero-visual img,
+    .force-reduced-motion .section-head .accent,
+    .force-reduced-motion .service-row .service-number,
+    .force-reduced-motion .service-row .service-media,
+    .force-reduced-motion .service-row .service-body,
+    .force-reduced-motion .why-row>span,
+    .force-reduced-motion .why-row h3,
+    .force-reduced-motion .why-row p,
+    .force-reduced-motion .step>span,
+    .force-reduced-motion .step h3,
+    .force-reduced-motion .step p,
+    .force-reduced-motion .cta .cta-inner{opacity:1!important;transform:none!important;clip-path:none!important}
+    .force-reduced-motion .cta:before{transform:none!important}
+
   </style>
   <script>
-  (()=>{const r=document.documentElement;r.classList.add('js');try{if(!matchMedia('(prefers-reduced-motion: reduce)').matches&&!sessionStorage.getItem('boss-intro-seen'))r.classList.add('show-loader')}catch(e){}setTimeout(()=>r.classList.add('intro-ready'),1800)})();
+  (()=>{const r=document.documentElement;r.classList.add('js');const forced=new URLSearchParams(location.search).get('motion')==='reduce';if(forced)r.classList.add('force-reduced-motion');try{if(!forced&&!matchMedia('(prefers-reduced-motion: reduce)').matches&&!sessionStorage.getItem('boss-intro-seen'))r.classList.add('show-loader')}catch(e){}setTimeout(()=>r.classList.add('intro-ready'),1800)})();
   </script>
 </head>
 <body>
@@ -723,6 +747,7 @@
 (()=>{
   const root=document.documentElement;
   const reduce=matchMedia('(prefers-reduced-motion: reduce)');
+  const reduced=reduce.matches||root.classList.contains('force-reduced-motion');
   const header=document.getElementById('siteHeader');
   const toggle=document.getElementById('menuToggle');
   const menu=document.getElementById('mobileMenu');
@@ -730,7 +755,7 @@
   let previousFocus=null;
 
   const releaseIntro=()=>root.classList.add('intro-ready');
-  const loaderShown=root.classList.contains('show-loader')&&!reduce.matches;
+  const loaderShown=root.classList.contains('show-loader')&&!reduced;
   if(loaderShown){
     requestAnimationFrame(()=>root.classList.add('loader-start'));
     const finishLoader=()=>{
@@ -763,13 +788,29 @@
 
   const revealEls=[...document.querySelectorAll('[data-reveal]')].filter(el=>!el.closest('.hero'));
   const cta=document.querySelector('[data-cta-reveal]');
-  if('IntersectionObserver' in window&&!reduce.matches){
+  if('IntersectionObserver' in window&&!reduced){
     const io=new IntersectionObserver(entries=>entries.forEach(entry=>{
       if(entry.isIntersecting){entry.target.classList.add('show');io.unobserve(entry.target)}
     }),{threshold:.12,rootMargin:'0px 0px -6% 0px'});
     revealEls.forEach(el=>io.observe(el));
     if(cta)io.observe(cta);
-    setTimeout(()=>revealEls.forEach(el=>{if(el.getBoundingClientRect().top<innerHeight*1.1)el.classList.add('show')}),1500);
+    const revealVisible=()=>{
+      revealEls.forEach(el=>{
+        if(el.classList.contains('show'))return;
+        const r=el.getBoundingClientRect();
+        if(r.top<innerHeight*.96&&r.bottom>0)el.classList.add('show');
+      });
+      if(cta&&!cta.classList.contains('show')){
+        const r=cta.getBoundingClientRect();
+        if(r.top<innerHeight*.96&&r.bottom>0)cta.classList.add('show');
+      }
+    };
+    addEventListener('scroll',revealVisible,{passive:true});
+    addEventListener('resize',revealVisible,{passive:true});
+    requestAnimationFrame(revealVisible);
+    setTimeout(revealVisible,250);
+    setTimeout(revealVisible,900);
+    setTimeout(revealVisible,1600);
   }else{
     revealEls.forEach(el=>el.classList.add('show'));
     if(cta)cta.classList.add('show');
