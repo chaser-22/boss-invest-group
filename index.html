@@ -1291,6 +1291,16 @@
       .intro-ready .hero-line>span{opacity:1;transform:none}
     }
 
+
+    @media(max-width:820px){
+      .hero h1{width:100%;max-width:none}
+      .hero-line{overflow:visible}
+      .hero-line>span{white-space:normal;max-width:100%}
+      .js:not(.intro-ready) .hero-line>span{opacity:0;transform:translateY(12px)}
+      .hero-line>span{transition:opacity .45s ease,transform .5s cubic-bezier(.2,.8,.2,1)}
+      .intro-ready .hero-line>span{opacity:1;transform:none}
+    }
+
   </style>
   <script>
   (()=>{const r=document.documentElement;r.classList.add('js');const q=new URLSearchParams(location.search);const forced=q.get('motion')==='reduce';const forceLoader=q.get('loader')==='1';const topLevel=window.top===window.self;const deepLink=location.hash.length>1;if(forced)r.classList.add('force-reduced-motion');if(deepLink){r.classList.add('deep-linking');setTimeout(()=>r.classList.remove('deep-linking'),600)}try{const seen=sessionStorage.getItem('boss-intro-seen');if(topLevel&&!deepLink&&!forced&&!matchMedia('(prefers-reduced-motion: reduce)').matches&&(forceLoader||!seen))r.classList.add('show-loader')}catch(e){}setTimeout(()=>r.classList.add('intro-ready'),5000)})();
