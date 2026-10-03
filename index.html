@@ -38,7 +38,7 @@
       --body:"Manrope",Arial,sans-serif;
     }
     *{box-sizing:border-box}
-    html{scroll-behavior:smooth;scroll-padding-top:84px;background:var(--black)}
+    html{scroll-behavior:smooth;scroll-padding-top:76px;background:var(--black)}
     body{margin:0;background:var(--black);color:var(--white);font:400 16px/1.7 var(--body);-webkit-font-smoothing:antialiased}
     body.menu-open,body.lightbox-open{overflow:hidden}
     img{display:block;max-width:100%}
@@ -239,7 +239,7 @@
     }
     @media(max-width:820px){
       :root{--gutter:28px;--section:82px}
-      html{scroll-padding-top:72px}
+      html{scroll-padding-top:68px}
       .site-header{height:70px}
       .header-inner{grid-template-columns:auto 1fr auto}
       .brand-copy{display:none}
@@ -461,7 +461,8 @@
     }
 
 
-    .force-reduced-motion *{animation-duration:.001ms!important;animation-delay:0s!important;transition-duration:.001ms!important;scroll-behavior:auto!important}
+    .force-reduced-motion{scroll-behavior:auto!important}
+    .force-reduced-motion *{animation-duration:.001ms!important;animation-delay:0s!important;transition-duration:.001ms!important}
     .force-reduced-motion .site-loader{display:none!important}
     .force-reduced-motion [data-reveal],
     .force-reduced-motion .hero .eyebrow,
@@ -587,13 +588,15 @@
     }
     @media(prefers-reduced-motion:reduce){
       .hero-visual img{will-change:auto!important}
-      .service-row:before,.steps:before{transition:none!important;transform:none!important}
+      .service-row:before{display:none!important}
+      .steps:before{transition:none!important;transform:none!important}
       .project-cursor{display:none!important}
       .lightbox,.lightbox img,.lightbox .lightbox-caption,.lightbox .lightbox-close{transition:none!important;transform:none!important}
       .magnetic-target{transform:none!important}
     }
     .force-reduced-motion .project-cursor{display:none!important}
-    .force-reduced-motion .service-row:before,.force-reduced-motion .steps:before{transform:none!important}
+    .force-reduced-motion .service-row:before{display:none!important}
+    .force-reduced-motion .steps:before{transform:none!important}
     .force-reduced-motion .magnetic-target{transform:none!important}
 
 
@@ -957,6 +960,7 @@
     lbCaption.textContent=btn.dataset.alt;
     lightbox.hidden=false;
     document.body.classList.add('lightbox-open');
+    document.querySelectorAll('header,main,footer,.mobile-dock').forEach(el=>el.inert=true);
     requestAnimationFrame(()=>requestAnimationFrame(()=>lightbox.classList.add('is-open')));
     setTimeout(()=>lbClose.focus(),30);
   }));
@@ -967,6 +971,7 @@
       lightbox.hidden=true;
       lbImg.removeAttribute('src');
       document.body.classList.remove('lightbox-open');
+      document.querySelectorAll('header,main,footer,.mobile-dock').forEach(el=>el.inert=false);
       if(trigger)trigger.focus();
     };
     reduced?finish():setTimeout(finish,240);
@@ -975,6 +980,11 @@
   lightbox.addEventListener('click',e=>{if(e.target===lightbox)closeLightbox()});
   addEventListener('keydown',e=>{
     if(e.key==='Escape'){closeLightbox();if(menu.classList.contains('open'))setMenu(false)}
+    if(e.key==='Tab'&&!lightbox.hidden){
+      e.preventDefault();
+      lbClose.focus();
+      return;
+    }
     if(e.key==='Tab'&&menu.classList.contains('open')){
       const focusable=[close,...menu.querySelectorAll('a[href]')];
       const first=focusable[0],last=focusable[focusable.length-1];
