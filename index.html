@@ -501,6 +501,39 @@
       .hero-stat span{font-size:8px}
     }
 
+
+    /* Copy and typography QA: full sentences must remain visible */
+    .hero h1{max-width:none;width:100%}
+    .hero-line{max-width:100%}
+    .hero-line>span{max-width:100%;overflow-wrap:normal;word-break:normal}
+    .hero-copy,.about-copy,.service-body,.field-copy,.why-intro,.why-row,.step,.cta-side,.contact-copy{min-width:0}
+    .hero-lead,.about-lead,.about-text,.section-head p,.service-body p,.field-copy>p,.why-intro p,.why-row p,.step p,.cta-side p,.contact-copy>p,.form-note{
+      max-width:100%;
+      overflow:visible;
+      text-wrap:pretty;
+      overflow-wrap:normal;
+      word-break:normal;
+    }
+    .section-title,.service-body h3,.why-row h3,.step h3,.cta h2,.contact-copy .section-title{
+      overflow:visible;
+      overflow-wrap:normal;
+      word-break:normal;
+      text-wrap:balance;
+    }
+    .hero-stat strong{white-space:normal;text-wrap:balance}
+    .hero-stat span{max-width:24ch;text-wrap:pretty}
+    @media(max-width:820px){
+      .hero h1{max-width:100%;width:100%}
+    }
+    @media(max-width:520px){
+      .hero h1{max-width:100%;width:100%;font-size:clamp(36px,10.2vw,45px)}
+      .hero-line{width:100%}
+      .hero-line>span{width:100%}
+      .hero-lead{font-size:15px;line-height:1.72}
+      .section-head p,.service-body p,.field-copy>p,.why-intro p,.why-row p,.step p,.contact-copy>p{font-size:14.5px;line-height:1.72}
+      .form-note{font-size:11px;line-height:1.55}
+    }
+
   </style>
   <script>
   (()=>{const r=document.documentElement;r.classList.add('js');const forced=new URLSearchParams(location.search).get('motion')==='reduce';const topLevel=window.top===window.self;if(forced)r.classList.add('force-reduced-motion');try{if(topLevel&&!forced&&!matchMedia('(prefers-reduced-motion: reduce)').matches&&!sessionStorage.getItem('boss-intro-seen'))r.classList.add('show-loader')}catch(e){}setTimeout(()=>r.classList.add('intro-ready'),1800)})();
@@ -559,7 +592,7 @@
       <div class="hero-copy" data-reveal>
         <div class="eyebrow">Novi Sad · Srbija</div>
         <h1 aria-label="Mašinsko malterisanje bez improvizacije."><span class="hero-line"><span>Mašinsko</span></span><span class="hero-line"><span>malterisanje</span></span><span class="hero-line hero-line-accent"><span>bez improvizacije.</span></span></h1>
-        <p class="hero-lead">Boss Invest Group izvodi mašinsko malterisanje, cementne košuljice i građevinske radove uz organizovan proces, pouzdanu ekipu i dogovor koji se poštuje.</p>
+        <p class="hero-lead">Boss Invest Group izvodi radove mašinskog malterisanja, izrade cementnih košuljica i druge građevinske radove — uz organizovan proces, pouzdanu ekipu i dogovor koji se poštuje.</p>
         <div class="hero-actions">
           <a class="btn btn-primary" href="tel:+381668869760">Pozovite nas <svg class="arrow" aria-hidden="true" viewBox="0 0 24 24"><path d="M5 12h13M13 6l6 6-6 6"/></svg></a>
           <a class="btn btn-secondary" href="#projekti">Pogledajte projekte</a>
@@ -571,9 +604,9 @@
       </figure>
     </div>
     <div class="container hero-stats" data-reveal>
-      <div class="hero-stat"><strong>800.000 m²</strong><span>urađenih projekata</span></div>
+      <div class="hero-stat"><strong>800.000 m²</strong><span>izvedenih radova</span></div>
       <div class="hero-stat"><strong>100+</strong><span>velikih projekata</span></div>
-      <div class="hero-stat"><strong>Srbija +</strong><span>iskustvo i u inostranstvu</span></div>
+      <div class="hero-stat"><strong>Srbija + inostranstvo</strong><span>iskustvo na domaćim i stranim projektima</span></div>
     </div>
   </section>
 
@@ -587,7 +620,7 @@
         <div class="eyebrow">O nama</div>
         <h2 class="section-title">Posao iza kog možemo da stanemo.</h2>
         <p class="about-lead">Dobar majstor nije samo onaj koji zna da radi. Dobar majstor zna i da poštuje dogovor.</p>
-        <p class="about-text">Boss Invest Group je specijalizovan za mašinsko malterisanje, sa iskustvom na velikim projektima širom Srbije i inostranstva. Važno nam je da iza svakog projekta ostanu dobro urađen posao i zadovoljan klijent.</p>
+        <p class="about-text">Boss Invest Group je firma specijalizovana za mašinsko malterisanje, sa iskustvom na velikim projektima širom Srbije i u inostranstvu. Važno nam je da svaki projekat završimo kvalitetno i da klijent bude zadovoljan rezultatom.</p>
         <div class="about-meta"><strong>Dogovor je dogovor.</strong><span>Novi Sad · Srbija</span></div>
       </div>
     </div>
@@ -597,7 +630,7 @@
     <div class="container">
       <div class="section-head" data-reveal>
         <div><div class="eyebrow">Usluge</div><h2 class="section-title">Tri usluge.<br><span class="accent">Jedan standard rada.</span></h2></div>
-        <p>Bez pretrpanih obećanja: jasna organizacija, profesionalna oprema i rad koji se vidi na objektu.</p>
+        <p>Bez praznih obećanja: jasna organizacija, profesionalna oprema i kvalitet koji se vidi na objektu.</p>
       </div>
       <div class="service-list">
         <article class="service-row" data-reveal>
@@ -642,7 +675,7 @@
       <div class="field-copy" data-reveal>
         <div class="eyebrow">Spremni za gradilište</div>
         <h2 class="section-title" id="field-title">Objekat nije idealan? <span class="accent">Mi se prilagođavamo.</span></h2>
-        <p>Za rad mašine potrebni su voda i dovoljno snažno trofazno napajanje. Kada ih na objektu nema, koristimo sopstvene rezervoare, pumpe i agregate kako bismo obezbedili uslove za rad.</p>
+        <p>Za rad mašine potrebni su voda i odgovarajuće trofazno napajanje. Kada ti uslovi nisu obezbeđeni na objektu, koristimo sopstvene rezervoare, pumpe i agregate kako bismo obezbedili kontinuitet rada.</p>
         <div class="field-points">
           <div class="field-point"><span>01</span><strong>Rezervoari — voda tamo gde je potrebna.</strong></div>
           <div class="field-point"><span>02</span><strong>Pumpe — kontinuitet rada na objektu.</strong></div>
@@ -679,13 +712,13 @@
       <div class="why-intro" data-reveal>
         <div class="eyebrow">Zašto mi</div>
         <h2 class="section-title">Dogovor je <span class="accent">dogovor.</span></h2>
-        <p>Ne želimo samo da završimo posao. Želimo da rezultat bude dovoljno dobar da nas klijent preporuči dalje.</p>
+        <p>Ne želimo samo da završimo posao. Želimo da rezultat bude dovoljno kvalitetan da nas klijent preporuči dalje.</p>
       </div>
       <div class="why-list">
         <article class="why-row" data-reveal><span>01</span><h3>Pouzdan dogovor</h3><p>Ono što definišemo na početku projekta ostaje smernica do završetka radova.</p></article>
         <article class="why-row" data-reveal><span>02</span><h3>Profesionalna oprema</h3><p>Organizovan rad i odgovarajuća mehanizacija smanjuju improvizacije na gradilištu.</p></article>
         <article class="why-row" data-reveal><span>03</span><h3>Veliki projekti</h3><p>Iskustvo na zahtevnim objektima donosi sigurnost u planiranju i izvođenju.</p></article>
-        <article class="why-row" data-reveal><span>04</span><h3>Završna obrada</h3><p>Kontrola detalja i kvaliteta je deo posla, ne dodatna opcija.</p></article>
+        <article class="why-row" data-reveal><span>04</span><h3>Završna obrada</h3><p>Kontrola detalja i kvaliteta deo je posla, a ne dodatna opcija.</p></article>
       </div>
     </div>
   </section>
@@ -699,7 +732,7 @@
       <div class="steps">
         <article class="step" data-reveal><span>01</span><h3>Kontakt i procena</h3><p>Razgovaramo o objektu, obimu posla, lokaciji i očekivanom terminu.</p></article>
         <article class="step" data-reveal><span>02</span><h3>Dogovor i priprema</h3><p>Definišemo uslove rada i pripremu gradilišta pre početka izvođenja.</p></article>
-        <article class="step" data-reveal><span>03</span><h3>Izvođenje radova</h3><p>Ekipa i oprema ulaze u organizovan proces sa jasnim tokom posla.</p></article>
+        <article class="step" data-reveal><span>03</span><h3>Izvođenje radova</h3><p>Na gradilište dolazimo sa organizovanom ekipom, odgovarajućom opremom i jasno definisanim planom rada.</p></article>
         <article class="step" data-reveal><span>04</span><h3>Kontrola i završetak</h3><p>Proveravamo završnu obradu i ostavljamo objekat spreman za sledeću fazu.</p></article>
       </div>
     </div>
@@ -717,7 +750,7 @@
       <div class="contact-copy" data-reveal>
         <div class="eyebrow">Kontakt</div>
         <h2 class="section-title">Hajde da dogovorimo projekat.</h2>
-        <p>Pošaljite osnovne informacije o objektu ili nas pozovite direktno. Za brzi dogovor dostupne su dve linije.</p>
+        <p>Pošaljite osnovne informacije o objektu ili nas pozovite direktno. Za brz dogovor dostupna su dva broja telefona.</p>
         <div class="contact-list">
           <a class="contact-item" href="tel:+381668869760"><span>Telefon</span><strong>066 88 69 760</strong></a>
           <a class="contact-item" href="tel:+381658069760"><span>Telefon</span><strong>065 80 69 760</strong></a>
@@ -731,8 +764,8 @@
         <div class="field"><label for="phone">Telefon</label><input id="phone" name="phone" inputmode="tel" autocomplete="tel" required></div>
         <div class="field"><label for="type">Vrsta projekta</label><select id="type" name="type"><option>Mašinsko malterisanje</option><option>Cementna košuljica</option><option>Rasuti materijali</option><option>Drugo</option></select></div>
         <div class="field"><label for="message">Poruka</label><textarea id="message" name="message" placeholder="Lokacija, kvadratura i kratak opis projekta"></textarea></div>
-        <button class="form-submit" type="submit">Pošaljite SMS upit</button>
-        <p class="form-note">Na telefonu će se otvoriti SMS poruka sa već popunjenim podacima.</p>
+        <button class="form-submit" type="submit">Pošaljite upit SMS-om</button>
+        <p class="form-note">Klikom na dugme otvoriće se SMS poruka sa već popunjenim podacima.</p>
       </form>
     </div>
   </section>
