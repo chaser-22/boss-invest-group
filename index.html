@@ -852,6 +852,143 @@
       .hero-copy{padding-bottom:calc(92px + env(safe-area-inset-bottom))}
     }
 
+
+    /* Cinematic continuity pass: flow, not noise */
+    [data-flow]{position:relative}
+    [data-flow]:not(.hero)::after{
+      content:"";
+      position:absolute;
+      z-index:4;
+      left:0;right:0;top:0;
+      height:1px;
+      pointer-events:none;
+      background:linear-gradient(90deg,transparent 0%,rgba(240,68,50,.42) 22%,rgba(240,68,50,.12) 68%,transparent 100%);
+      transform:scaleX(0);
+      transform-origin:left;
+      opacity:.5;
+      transition:transform .85s cubic-bezier(.65,0,.18,1),opacity .45s ease;
+    }
+    [data-flow].flow-seen:not(.hero)::after{transform:scaleX(1)}
+
+    .flow-rail{
+      display:none;
+      position:fixed;
+      z-index:70;
+      left:20px;
+      top:50%;
+      width:58px;
+      transform:translateY(-50%);
+      pointer-events:none;
+      color:#8e8982;
+      font:700 9px/1 var(--display);
+      letter-spacing:.1em;
+      text-transform:uppercase;
+    }
+    .flow-rail-number{display:block;color:var(--red);margin-bottom:10px}
+    .flow-rail-track{position:relative;display:block;width:1px;height:74px;margin-left:3px;background:rgba(255,255,255,.12)}
+    .flow-rail-track i{position:absolute;left:-2px;top:0;width:5px;height:14px;background:var(--red);box-shadow:0 0 0 1px rgba(240,68,50,.12);transform:translateY(0);transition:transform .22s cubic-bezier(.2,.8,.2,1)}
+    .flow-rail-label{display:block;margin-top:10px;writing-mode:vertical-rl;transform:rotate(180deg);white-space:nowrap;color:#72777b}
+    @media(min-width:1460px) and (min-height:620px){
+      .flow-rail{display:block}
+    }
+
+    /* Major headings reveal as architectural blocks rather than generic fades. */
+    .js .section-head[data-reveal] .section-title,
+    .js .about-copy[data-reveal] .section-title,
+    .js .field-copy[data-reveal] .section-title,
+    .js .why-intro[data-reveal] .section-title,
+    .js .contact-copy[data-reveal] .section-title{
+      clip-path:inset(0 0 100% 0);
+      transform:translateY(14px);
+      transition:clip-path .76s cubic-bezier(.65,0,.18,1),transform .72s cubic-bezier(.2,.8,.2,1);
+    }
+    .js .section-head[data-reveal].show .section-title,
+    .js .about-copy[data-reveal].show .section-title,
+    .js .field-copy[data-reveal].show .section-title,
+    .js .why-intro[data-reveal].show .section-title,
+    .js .contact-copy[data-reveal].show .section-title{
+      clip-path:inset(0 0 0 0);
+      transform:none;
+    }
+    .js .section-head[data-reveal] .eyebrow:before,
+    .js .about-copy[data-reveal] .eyebrow:before,
+    .js .field-copy[data-reveal] .eyebrow:before,
+    .js .why-intro[data-reveal] .eyebrow:before,
+    .js .contact-copy[data-reveal] .eyebrow:before{
+      transform:scaleX(0);
+      transform-origin:left;
+      transition:transform .6s .05s cubic-bezier(.65,0,.18,1);
+    }
+    .js .section-head[data-reveal].show .eyebrow:before,
+    .js .about-copy[data-reveal].show .eyebrow:before,
+    .js .field-copy[data-reveal].show .eyebrow:before,
+    .js .why-intro[data-reveal].show .eyebrow:before,
+    .js .contact-copy[data-reveal].show .eyebrow:before{transform:scaleX(1)}
+
+    /* Services become a restrained scroll narrative on large desktop. */
+    @media(min-width:1081px) and (prefers-reduced-motion:no-preference){
+      .services.story-active .service-row{
+        opacity:.58;
+        transform:translateY(0);
+        transition:opacity .38s ease,transform .42s cubic-bezier(.2,.8,.2,1),border-color .3s ease;
+      }
+      .services.story-active .service-row.is-active{
+        opacity:1;
+        transform:translateX(6px);
+        border-bottom-color:rgba(240,68,50,.28);
+      }
+      .services.story-active .service-row.is-active:before{transform:scaleY(1)}
+      .services.story-active .service-row.is-active .service-media{
+        box-shadow:0 20px 52px rgba(0,0,0,.24);
+      }
+      .services.story-active .service-row:not(.is-active) .service-media img{
+        filter:saturate(.72) brightness(.86);
+      }
+      .service-row .service-media img{transition:transform .6s cubic-bezier(.2,.8,.2,1),filter .38s ease}
+    }
+
+    /* Projects arrive as a composition instead of seven simultaneous tiles. */
+    .js .project-grid .project:nth-child(1){--project-delay:0ms}
+    .js .project-grid .project:nth-child(2){--project-delay:70ms}
+    .js .project-grid .project:nth-child(3){--project-delay:40ms}
+    .js .project-grid .project:nth-child(4){--project-delay:105ms}
+    .js .project-grid .project:nth-child(5){--project-delay:170ms}
+    .js .project-grid .project:nth-child(6){--project-delay:70ms}
+    .js .project-grid .project:nth-child(7){--project-delay:140ms}
+    .js .project-grid .project[data-reveal]{
+      transition-delay:var(--project-delay,0ms);
+    }
+
+    /* Give section endings a softer cinematic handoff without overlays. */
+    .about,.field-proof,.why{box-shadow:inset 0 -1px rgba(15,18,22,.1)}
+    .services,.projects,.process,.contact{box-shadow:inset 0 1px rgba(255,255,255,.025),inset 0 -1px rgba(255,255,255,.03)}
+
+    @media(max-width:1080px){
+      .services.story-active .service-row{opacity:1!important;transform:none!important}
+      .services.story-active .service-row .service-media img{filter:none!important}
+    }
+    @media(prefers-reduced-motion:reduce){
+      .flow-rail{display:none!important}
+      [data-flow]:not(.hero)::after{transform:scaleX(1)!important;transition:none!important}
+      .js .section-head[data-reveal] .section-title,
+      .js .about-copy[data-reveal] .section-title,
+      .js .field-copy[data-reveal] .section-title,
+      .js .why-intro[data-reveal] .section-title,
+      .js .contact-copy[data-reveal] .section-title{
+        clip-path:none!important;transform:none!important;transition:none!important
+      }
+      .js .section-head[data-reveal] .eyebrow:before,
+      .js .about-copy[data-reveal] .eyebrow:before,
+      .js .field-copy[data-reveal] .eyebrow:before,
+      .js .why-intro[data-reveal] .eyebrow:before,
+      .js .contact-copy[data-reveal] .eyebrow:before{transform:scaleX(1)!important;transition:none!important}
+      .js .project-grid .project[data-reveal]{transition-delay:0ms!important}
+    }
+    .force-reduced-motion .flow-rail{display:none!important}
+    .force-reduced-motion [data-flow]:not(.hero)::after{transform:scaleX(1)!important}
+    .force-reduced-motion .section-title{clip-path:none!important;transform:none!important}
+    .force-reduced-motion .eyebrow:before{transform:scaleX(1)!important}
+
   </style>
   <script>
   (()=>{const r=document.documentElement;r.classList.add('js');const forced=new URLSearchParams(location.search).get('motion')==='reduce';const topLevel=window.top===window.self;if(forced)r.classList.add('force-reduced-motion');try{if(topLevel&&!forced&&!matchMedia('(prefers-reduced-motion: reduce)').matches&&!sessionStorage.getItem('boss-intro-seen'))r.classList.add('show-loader')}catch(e){}setTimeout(()=>r.classList.add('intro-ready'),1800)})();
@@ -866,6 +1003,11 @@
   </div>
 </div>
 <a class="skip" href="#main">Preskoči na sadržaj</a>
+<div class="flow-rail" id="flowRail" aria-hidden="true">
+  <span class="flow-rail-number" id="flowNumber">01</span>
+  <span class="flow-rail-track"><i id="flowMarker"></i></span>
+  <span class="flow-rail-label" id="flowLabel">Početna</span>
+</div>
 
 <header class="site-header" id="siteHeader">
   <div class="container header-inner">
@@ -905,7 +1047,7 @@
 </div>
 
 <main id="main">
-  <section class="hero" id="top">
+  <section class="hero" id="top" data-flow="01" data-flow-label="Početna">
     <div class="container hero-main">
       <div class="hero-copy" data-reveal>
         <div class="eyebrow">Novi Sad · Srbija</div>
@@ -928,7 +1070,7 @@
     </div>
   </section>
 
-  <section class="section about" id="o-nama">
+  <section class="section about" id="o-nama" data-flow="02" data-flow-label="O nama">
     <div class="container about-grid">
       <figure class="about-media" data-reveal>
         <img src="/assets/finished.jpg" width="950" height="948" loading="lazy" decoding="async" alt="Završene unutrašnje površine nakon radova Boss Invest Group">
@@ -944,7 +1086,7 @@
     </div>
   </section>
 
-  <section class="section services" id="usluge">
+  <section class="section services" id="usluge" data-flow="03" data-flow-label="Usluge">
     <div class="container">
       <div class="section-head" data-reveal>
         <div><div class="eyebrow">Usluge</div><h2 class="section-title">Tri usluge.<br><span class="accent">Jedan standard rada.</span></h2></div>
@@ -988,7 +1130,7 @@
     </div>
   </section>
 
-  <section class="section field-proof" aria-labelledby="field-title">
+  <section class="section field-proof" aria-labelledby="field-title" data-flow="04" data-flow-label="Na terenu">
     <div class="container field-grid">
       <div class="field-copy" data-reveal>
         <div class="eyebrow">Spremni za gradilište</div>
@@ -1007,7 +1149,7 @@
     </div>
   </section>
 
-  <section class="section projects" id="projekti">
+  <section class="section projects" id="projekti" data-flow="05" data-flow-label="Projekti">
     <div class="container">
       <div class="section-head" data-reveal>
         <div><div class="eyebrow">Projekti</div><h2 class="section-title">Radovi koji<br><span class="accent">govore za nas.</span></h2></div>
@@ -1025,7 +1167,7 @@
     </div>
   </section>
 
-  <section class="section why" id="zasto-mi">
+  <section class="section why" id="zasto-mi" data-flow="06" data-flow-label="Zašto mi">
     <div class="container why-grid">
       <div class="why-intro" data-reveal>
         <div class="eyebrow">Zašto mi</div>
@@ -1041,7 +1183,7 @@
     </div>
   </section>
 
-  <section class="section process" id="proces" data-process>
+  <section class="section process" id="proces" data-process data-flow="07" data-flow-label="Proces">
     <div class="container">
       <div class="section-head" data-reveal>
         <div><div class="eyebrow">Proces</div><h2 class="section-title">Od prvog poziva<br><span class="accent">do završetka.</span></h2></div>
@@ -1063,7 +1205,7 @@
     </div>
   </section>
 
-  <section class="section contact" id="kontakt">
+  <section class="section contact" id="kontakt" data-flow="08" data-flow-label="Kontakt">
     <div class="container contact-grid">
       <div class="contact-copy" data-reveal>
         <div class="eyebrow">Kontakt</div>
@@ -1319,6 +1461,75 @@
       });
     });
   }
+
+
+  // Page-flow choreography: subtle rail + section seams.
+  const flowSections=[...document.querySelectorAll('[data-flow]')];
+  const flowNumber=document.getElementById('flowNumber');
+  const flowLabel=document.getElementById('flowLabel');
+  const flowMarker=document.getElementById('flowMarker');
+  let flowTick=false;
+  const updateFlow=()=>{
+    flowTick=false;
+    if(!flowSections.length)return;
+    const focusY=scrollY+innerHeight*.46;
+    let active=flowSections[0];
+    let best=Infinity;
+    flowSections.forEach(section=>{
+      const top=section.offsetTop;
+      const center=top+section.offsetHeight*.5;
+      const distance=Math.abs(center-focusY);
+      if(distance<best){best=distance;active=section}
+    });
+    const index=Math.max(0,flowSections.indexOf(active));
+    if(flowNumber)flowNumber.textContent=active.dataset.flow||String(index+1).padStart(2,'0');
+    if(flowLabel)flowLabel.textContent=active.dataset.flowLabel||'';
+    if(flowMarker){
+      const maxTravel=60;
+      const progress=flowSections.length>1?index/(flowSections.length-1):0;
+      flowMarker.style.transform='translateY('+(progress*maxTravel).toFixed(1)+'px)';
+    }
+  };
+  const queueFlow=()=>{if(!flowTick){flowTick=true;requestAnimationFrame(updateFlow)}};
+  addEventListener('scroll',queueFlow,{passive:true});
+  addEventListener('resize',queueFlow,{passive:true});
+  updateFlow();
+
+  if('IntersectionObserver' in window){
+    const seamObserver=new IntersectionObserver(entries=>entries.forEach(entry=>{
+      if(entry.isIntersecting)entry.target.classList.add('flow-seen');
+    }),{threshold:.08,rootMargin:'0px 0px -8% 0px'});
+    flowSections.forEach(section=>seamObserver.observe(section));
+  }else flowSections.forEach(section=>section.classList.add('flow-seen'));
+
+  // Services: keep one row visually leading the story as the user scrolls.
+  const servicesSection=document.querySelector('.services');
+  const serviceRows=[...document.querySelectorAll('.service-row')];
+  let serviceTick=false;
+  const updateServiceStory=()=>{
+    serviceTick=false;
+    if(!servicesSection||!serviceRows.length||reduced||innerWidth<1081){
+      servicesSection?.classList.remove('story-active');
+      serviceRows.forEach(row=>row.classList.remove('is-active'));
+      return;
+    }
+    const sectionRect=servicesSection.getBoundingClientRect();
+    const inStory=sectionRect.top<innerHeight*.78&&sectionRect.bottom>innerHeight*.24;
+    servicesSection.classList.toggle('story-active',inStory);
+    if(!inStory){serviceRows.forEach(row=>row.classList.remove('is-active'));return}
+    const targetY=innerHeight*.54;
+    let active=serviceRows[0],distance=Infinity;
+    serviceRows.forEach(row=>{
+      const r=row.getBoundingClientRect();
+      const d=Math.abs((r.top+r.height*.5)-targetY);
+      if(d<distance){distance=d;active=row}
+    });
+    serviceRows.forEach(row=>row.classList.toggle('is-active',row===active));
+  };
+  const queueServiceStory=()=>{if(!serviceTick){serviceTick=true;requestAnimationFrame(updateServiceStory)}};
+  addEventListener('scroll',queueServiceStory,{passive:true});
+  addEventListener('resize',queueServiceStory,{passive:true});
+  updateServiceStory();
 
   document.getElementById('contactForm').addEventListener('submit',e=>{
     e.preventDefault();
