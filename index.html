@@ -1095,7 +1095,7 @@
       <div class="service-list">
         <article class="service-row" data-reveal>
           <div class="service-number">01</div>
-          <div class="service-media"><img src="/assets/machine-wall.jpg" width="279" height="372" loading="lazy" decoding="async" alt="Boss Invest Group majstor tokom mašinskog malterisanja"></div>
+          <div class="service-media"><img src="/assets/machine-wall.jpg" width="279" height="372" loading="eager" decoding="async" alt="Boss Invest Group majstor tokom mašinskog malterisanja"></div>
           <div class="service-body">
             <span class="service-kicker">Glavna usluga</span>
             <h3>Mašinsko malterisanje</h3>
@@ -1106,7 +1106,7 @@
         </article>
         <article class="service-row" data-reveal>
           <div class="service-number">02</div>
-          <div class="service-media"><img src="/assets/screed.jpg" width="280" height="372" loading="lazy" decoding="async" alt="Izrada cementne košuljice"></div>
+          <div class="service-media"><img src="/assets/screed.jpg" width="280" height="372" loading="eager" decoding="async" alt="Izrada cementne košuljice"></div>
           <div class="service-body">
             <span class="service-kicker">Podloga</span>
             <h3>Cementna košuljica</h3>
@@ -1117,7 +1117,7 @@
         </article>
         <article class="service-row" data-reveal>
           <div class="service-number">03</div>
-          <div class="service-media"><img src="/assets/materials-yard.jpg" width="280" height="376" loading="lazy" decoding="async" alt="Rasuti građevinski materijali"></div>
+          <div class="service-media"><img src="/assets/materials-yard.jpg" width="280" height="376" loading="eager" decoding="async" alt="Rasuti građevinski materijali"></div>
           <div class="service-body">
             <span class="service-kicker">Materijal</span>
             <h3>Rasuti materijali</h3>
@@ -1305,6 +1305,9 @@
     initialHashTarget.querySelectorAll('[data-reveal]').forEach(el=>el.classList.add('show'));
     initialHashTarget.classList.add('flow-seen');
     if(initialHashTarget===cta)cta.classList.add('show');
+    const settleHash=()=>initialHashTarget.scrollIntoView({behavior:'auto',block:'start'});
+    requestAnimationFrame(settleHash);
+    setTimeout(settleHash,60);
   }
   if('IntersectionObserver' in window&&!reduced){
     const io=new IntersectionObserver(entries=>entries.forEach(entry=>{
