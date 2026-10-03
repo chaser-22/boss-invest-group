@@ -228,7 +228,8 @@
     @media(max-width:1080px){
       .desktop-nav{display:none}
       .header-inner{grid-template-columns:auto 1fr auto auto}
-      .menu-toggle{display:block}
+      .header-cta{grid-column:3;justify-self:end}
+      .menu-toggle{display:block;grid-column:4}
       .hero-main{grid-template-columns:minmax(0,1.05fr) minmax(340px,.95fr);gap:32px}
       .hero h1{font-size:clamp(48px,5.8vw,62px)}
       .service-row{grid-template-columns:42px minmax(230px,.72fr) minmax(0,1.28fr);gap:26px}
@@ -240,8 +241,10 @@
       :root{--gutter:28px;--section:82px}
       html{scroll-padding-top:72px}
       .site-header{height:70px}
+      .header-inner{grid-template-columns:auto 1fr auto}
       .brand-copy{display:none}
       .header-cta{display:none}
+      .menu-toggle{grid-column:3;justify-self:end}
       .hero{padding-top:70px}
       .hero-main{min-height:0;grid-template-columns:1fr;gap:0;padding:0}
       .hero-visual{order:-1;min-height:50svh}
