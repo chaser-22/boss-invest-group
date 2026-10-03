@@ -1,0 +1,16 @@
+<!doctype html>
+<html><head><meta name="viewport" content="width=device-width,initial-scale=1"><style>
+*{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#0b0d0f}
+.stage{position:fixed;inset:0;display:grid;place-items:center;overflow:hidden;background:#0b0d0f}
+.bg{position:absolute;inset:-8%;background-position:center;background-size:cover;filter:blur(30px) brightness(.34) saturate(.72);transform:scale(1.08)}
+.bg:after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(5,6,7,.78),rgba(5,6,7,.15),rgba(5,6,7,.72))}
+.photo{position:relative;z-index:2;height:100vh;width:min(52vw,620px);object-fit:cover;object-position:center;border-left:1px solid rgba(255,255,255,.12);border-right:1px solid rgba(255,255,255,.12);box-shadow:0 0 80px rgba(0,0,0,.55)}
+</style></head><body><div class="stage"><div class="bg" id="bg"></div><img class="photo" id="photo" alt=""></div>
+<script>
+const sources={
+team:"https://scontent.cdninstagram.com/v/t51.71878-15/673864728_994060459988849_177748279048302648_n.jpg?stp=dst-jpg_e35_s640x640_tt6&_nc_cat=111&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiQ0xJUFMuYmVzdF9pbWFnZV91cmxnZW4uQzIifQ%3D%3D&_nc_ohc=bm4GXWHUf6IQ7kNvwH-q4Ym&_nc_oc=Adp18WHdGHla9r_LPi48DFp3pm-EZIENGJDiDX5966HgURM-7nZGHhLtEvittw4hoiE&_nc_zt=23&_nc_ht=scontent.cdninstagram.com&_nc_gid=0YN0mOOynpFgg3AjQeUIJQ&_nc_ss=7b689&oh=00_AQM_wc_No5ncIIXACNUM-dH5FXjujv6D6ByBV2IL1GnEJQ&oe=6AC70AD6",
+wall:"https://scontent.cdninstagram.com/v/t51.82787-15/651212681_17987247200955778_2382134073128280866_n.jpg?stp=dst-jpg_e35_s640x640_tt6&_nc_cat=104&ccb=7-5&_nc_sid=18de74&efg=eyJlZmdfdGFnIjoiQ0xJUFMuYmVzdF9pbWFnZV91cmxnZW4uQzIifQ%3D%3D&_nc_ohc=0r3GmXQI7IEQ7kNvwHd0GG7&_nc_oc=AdqZRMFp66kP_vXlup6NrOB4xY6VqrbelV_jdxTsT6b6_n5z3yemHS08A9l6_zjDYYc&_nc_zt=23&_nc_ht=scontent.cdninstagram.com&_nc_gid=0YN0mOOynpFgg3AjQeUIJQ&_nc_ss=7b689&oh=00_AQNHc3KCrNZu-GcK2ZaGL8-ZzKnfxpB0uGS8N5f0Md_ZTQ&oe=6AC72280"
+};
+const key=new URLSearchParams(location.search).get("img")||"team"; const src=sources[key]||sources.team;
+document.getElementById("photo").src=src; document.getElementById("bg").style.backgroundImage="url('"+src+"')";
+</script></body></html>
