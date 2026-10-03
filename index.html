@@ -847,6 +847,11 @@
       .form{padding:22px 18px}
     }
 
+
+    @media(max-width:520px){
+      .hero-copy{padding-bottom:calc(92px + env(safe-area-inset-bottom))}
+    }
+
   </style>
   <script>
   (()=>{const r=document.documentElement;r.classList.add('js');const forced=new URLSearchParams(location.search).get('motion')==='reduce';const topLevel=window.top===window.self;if(forced)r.classList.add('force-reduced-motion');try{if(topLevel&&!forced&&!matchMedia('(prefers-reduced-motion: reduce)').matches&&!sessionStorage.getItem('boss-intro-seen'))r.classList.add('show-loader')}catch(e){}setTimeout(()=>r.classList.add('intro-ready'),1800)})();
