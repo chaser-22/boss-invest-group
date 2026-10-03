@@ -79,7 +79,7 @@
     .desktop-nav a{font-size:13px;color:#d8d3cc;position:relative}
     .desktop-nav a:after{content:"";position:absolute;height:2px;left:0;right:100%;bottom:-9px;background:var(--red);transition:right .2s ease}
     .desktop-nav a:hover:after,.desktop-nav a.active:after{right:0}
-    .header-cta{min-height:46px;padding:0 18px;background:var(--red);border:1px solid var(--red);font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
+    .header-cta{min-height:46px;width:max-content;justify-self:end;padding:0 18px;background:var(--red);border:1px solid var(--red);font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
     .menu-btn{display:none;width:44px;height:44px;border:1px solid var(--line);background:#111;cursor:pointer}
     .mobile-menu{position:fixed;z-index:100;inset:0;background:#0b0d0f;padding:calc(22px + env(safe-area-inset-top)) max(22px,env(safe-area-inset-right)) calc(24px + env(safe-area-inset-bottom)) max(22px,env(safe-area-inset-left));display:flex;flex-direction:column;transform:translateX(100%);visibility:hidden;transition:transform .28s ease,visibility .28s step-end}
     .mobile-menu.open{transform:none;visibility:visible;transition:transform .28s ease}
@@ -229,10 +229,11 @@
 
     @media(max-width:1080px){
       .desktop-nav{display:none}
-      .header-inner{grid-template-columns:auto 1fr auto auto}
-      .menu-btn{display:block}
+      .header-inner{grid-template-columns:auto 1fr auto}
+      .header-cta{grid-column:2;justify-self:end}
+      .menu-btn{display:block;grid-column:3}
       .hero{grid-template-columns:minmax(0,1.08fr) minmax(350px,.92fr)}
-      .hero h1{font-size:clamp(56px,7.2vw,78px)}
+      .hero h1{font-size:clamp(46px,4.9vw,54px)}
       .service-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
       .service-card:last-child{grid-column:1/-1;min-height:520px;display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr)}
       .service-card:last-child .service-photo{aspect-ratio:auto}
