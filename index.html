@@ -991,7 +991,7 @@
 
   </style>
   <script>
-  (()=>{const r=document.documentElement;r.classList.add('js');const forced=new URLSearchParams(location.search).get('motion')==='reduce';const topLevel=window.top===window.self;if(forced)r.classList.add('force-reduced-motion');try{if(topLevel&&!forced&&!matchMedia('(prefers-reduced-motion: reduce)').matches&&!sessionStorage.getItem('boss-intro-seen'))r.classList.add('show-loader')}catch(e){}setTimeout(()=>r.classList.add('intro-ready'),1800)})();
+  (()=>{const r=document.documentElement;r.classList.add('js');const forced=new URLSearchParams(location.search).get('motion')==='reduce';const topLevel=window.top===window.self;const deepLink=location.hash.length>1;if(forced)r.classList.add('force-reduced-motion');try{if(topLevel&&!deepLink&&!forced&&!matchMedia('(prefers-reduced-motion: reduce)').matches&&!sessionStorage.getItem('boss-intro-seen'))r.classList.add('show-loader')}catch(e){}setTimeout(()=>r.classList.add('intro-ready'),1800)})();
   </script>
 </head>
 <body>
@@ -1300,6 +1300,12 @@
 
   const revealEls=[...document.querySelectorAll('[data-reveal]')].filter(el=>!el.closest('.hero'));
   const cta=document.querySelector('[data-cta-reveal]');
+  const initialHashTarget=location.hash?document.querySelector(location.hash):null;
+  if(initialHashTarget){
+    initialHashTarget.querySelectorAll('[data-reveal]').forEach(el=>el.classList.add('show'));
+    initialHashTarget.classList.add('flow-seen');
+    if(initialHashTarget===cta)cta.classList.add('show');
+  }
   if('IntersectionObserver' in window&&!reduced){
     const io=new IntersectionObserver(entries=>entries.forEach(entry=>{
       if(entry.isIntersecting){entry.target.classList.add('show');io.unobserve(entry.target)}
